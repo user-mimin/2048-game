@@ -6,6 +6,7 @@ on:
       - main
 env:
   IMAGE_NAME: "${{ secrets.DOCKER_USER }}/2048-miminnusa"
+  DOCKER_USER: "${{ secrets.DOCKER_USER }}"
 jobs:
   build-push-image:
     runs-on: self-hosted
@@ -28,8 +29,6 @@ jobs:
     needs: build-push-image
     runs-on: self-hosted
     steps:
-      - name: create environtment variable
-        run: echo "DOCKER_USER=${{ secrets.DOCKER_USER }}" > .env
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: stop and remove existing container
